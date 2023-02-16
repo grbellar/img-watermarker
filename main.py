@@ -1,6 +1,6 @@
 import tkinter as tk
 import tkinter.filedialog
-from PIL import ImageTk, Image
+from PIL import ImageTk, Image, ImageDraw, ImageFont
 
 
 def resize_img_for_display(img: Image):
@@ -12,6 +12,13 @@ def resize_img_for_display(img: Image):
 def update_img_display():
     fp = tkinter.filedialog.askopenfilename(parent=frame, title="Choose your image to watermark")
     new_image = Image.open(fp)
+
+    draw = ImageDraw.Draw(new_image)
+    text = "Grant Bellar"
+
+    font = ImageFont.truetype('arial.ttf', 72)
+    draw.text((3000, 3000), text=text, font=font)
+
     resized_new_img = resize_img_for_display(new_image)
     # create tk photo image for passing to Label
     photo_img = ImageTk.PhotoImage(resized_new_img)
