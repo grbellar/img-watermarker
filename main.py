@@ -35,12 +35,14 @@ resized_img = resize_img_for_display(image)
 photo_image = ImageTk.PhotoImage(resized_img)
 # create label using the image as the display
 img_display = tk.Label(frame, image=photo_image)
-img_display.grid(row=0, column=0)
+img_display.grid(row=0, column=0, rowspan=2)
 
 
-button = tk.Button(frame, text="Upload", height=1, width=15, command=update_img_display)
-button.grid(column=1, row=1)
+upload_btn = tk.Button(frame, text="Upload", height=1, width=15, command=update_img_display)
+upload_btn.grid(row=1, column=1)
 
+watermark_btn = tk.Button(frame, text="Add watermark", height=1, width=15)
+watermark_btn.grid(row=2, column=1)
 
 # Start the event loop.
 root.mainloop()
