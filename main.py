@@ -1,6 +1,9 @@
 import tkinter as tk
 import tkinter.filedialog
 from PIL import ImageTk, Image, ImageDraw, ImageFont
+# TODO: 1. Add ability to download watermarked images.
+#       2. Fix sizing and display issues with image. Needs to be centered. Same with buttons.
+#       3. Refactor functionality into classes. Main.py is confusing
 
 
 def resize_img_for_display(img: Image):
