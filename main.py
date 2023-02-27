@@ -4,6 +4,7 @@ from PIL import ImageTk, Image, ImageDraw, ImageFont
 # TODO: 1. Add ability to download watermarked images.
 #       2. Fix sizing and display issues with image. Needs to be centered. Same with buttons.
 #       3. Refactor functionality into classes. Main.py is confusing
+#       4. Error handling for clicking 'cancel' on upload box
 
 
 def resize_img_for_display(img: Image):
@@ -14,15 +15,20 @@ def resize_img_for_display(img: Image):
 
 def update_img_display():
     fp = tkinter.filedialog.askopenfilename(parent=frame, title="Choose your image to watermark")
-    new_image = Image.open(fp)
+    image = Image.open(fp)
+    width = image.width
+    height = image.height
 
-    draw = ImageDraw.Draw(new_image)
-    text = "Grant Bellar"
+    x_coord = int(width * 0.5)
+    y_coord = int(height * 0.5)
 
-    font = ImageFont.truetype('arial.ttf', 200)
-    draw.text((3000, 3000), text=text, font=font)
+    watermark = Image.open("./upload/watermark.jpg").copy()
+    watermark.thumbnail((600, 600))
 
-    resized_new_img = resize_img_for_display(new_image)
+    result = image.copy()
+    result.paste(watermark, (x_coord, y_coord))
+
+    resized_new_img = resize_img_for_display(result)
     # create tk photo image for passing to Label
     photo_img = ImageTk.PhotoImage(resized_new_img)
     # update the label with new image
