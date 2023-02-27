@@ -8,7 +8,7 @@ from PIL import ImageTk, Image, ImageDraw, ImageFont
 
 def resize_img_for_display(img: Image):
     tmp = img.copy()
-    tmp.thumbnail((2000, 2000))
+    tmp.thumbnail((800, 800))
     return tmp
 
 
@@ -30,13 +30,13 @@ def update_img_display():
     img_display.image = photo_img  # for some reason I have to keep a reference to the new image
 
 
-root = tk.Tk()
-root.title("Image Watermarker")
-root.geometry('1200x800')
+win = tk.Tk()
+win.title("Image Watermarker")
+win.geometry('1200x800')
 
-frame = tk.Frame(root)
+frame = tk.Frame(win)
 frame.grid(column=0, row=0)
-frame.place(anchor='center')
+# frame.place(anchor='center')
 
 # This creates the image the first time the program is run.
 image = Image.open('./upload/samp.jpg')
@@ -45,14 +45,14 @@ resized_img = resize_img_for_display(image)
 photo_image = ImageTk.PhotoImage(resized_img)
 # create label using the image as the display
 img_display = tk.Label(frame, image=photo_image)
-img_display.grid(row=0, column=0, rowspan=2)
+img_display.grid(row=0, column=0)
 
 
 upload_btn = tk.Button(frame, text="Upload", height=1, width=15, command=update_img_display)
-upload_btn.grid(row=1, column=1)
+upload_btn.grid(row=1, column=0)
 
 watermark_btn = tk.Button(frame, text="Add watermark", height=1, width=15)
-watermark_btn.grid(row=2, column=1)
+watermark_btn.grid(row=2, column=0)
 
 # Start the event loop.
-root.mainloop()
+win.mainloop()
