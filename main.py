@@ -3,7 +3,7 @@ import tkinter.filedialog
 from PIL import ImageTk, Image
 # TODO: 1. Refactor functionality into classes. Main.py is confusing
 #       2. Error handling for clicking 'cancel' on upload box
-#       3. file save imrovements, default and allowed filetypes
+#       3. file save improvements, default and allowed filetypes
 
 global image_to_save
 
